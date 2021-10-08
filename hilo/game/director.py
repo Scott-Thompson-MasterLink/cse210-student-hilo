@@ -12,8 +12,8 @@ class Director():
 
         while self.keep_playing:
             self.get_card()
-            self.total_score()
             self.do_output()
+            self.track_score()
             
 
     # I've changed this name from get_input to get_card
@@ -22,9 +22,14 @@ class Director():
 
         self.dealer.deal_card()
 
-    # I'm not sure if we should use this function now... 
-    def total_score(self):
-        pass
+    # I've changed the name of this function in order to track the score
+    # and display if the user lost the game
+    def track_score(self):
+        
+        if self.score <= 0:
+            self.score = 0
+            self.keep_playing = False
+            print('You\'ve lost the game!')
         
 
     def do_output(self):
@@ -46,8 +51,9 @@ class Director():
         # Maybe the dealer should handle if they can keep playing
         # since the score may be 0 and they could not be able to play anymore.
         if playing.lower() == 'y':
-            self.start_game()
+            self.keep_playing = True
         else:
+            self.keep_playing = False
             print('Good bye baby!')
 
 
