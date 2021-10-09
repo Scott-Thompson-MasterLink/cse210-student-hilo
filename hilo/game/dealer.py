@@ -43,11 +43,15 @@ class Dealer:
         if guess.lower() == 'h':
             if self.previous_card < self.new_card:
                 return 100
-            elif self.previous_card >= self.new_card:
+            elif self.previous_card > self.new_card:
                 return -75
+            elif self.previous_card == self.new_card:
+                return 0
         
         elif guess.lower() == 'l':
             if self.previous_card > self.new_card:
                 return 100
-            elif self.previous_card <= self.new_card:
+            elif self.previous_card < self.new_card:
                 return -75
+            elif self.previous_card == self.new_card:
+                return 0

@@ -42,9 +42,9 @@ class Director():
         # that comes from the dealer.
         self.score += self.dealer.compare_card(user_input)
 
-        print(f'Next card was: {self.dealer.previous_card}')
+        print(f'Next card was: {self.dealer.new_card}')
 
-        print(f'Your score is {self.score}')
+        print(f'Your score is: {self.score}')
 
         playing = input('Keep playing? [y/n] ')
 
@@ -56,3 +56,5 @@ class Director():
         else:
             self.keep_playing = False
             print('Good bye baby!')
+
+        print()
