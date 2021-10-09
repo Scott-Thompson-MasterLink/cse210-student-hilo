@@ -1,8 +1,24 @@
 from game.dealer import Dealer
 
 class Director():
+    
+    '''The responsibilites of the Director is to keep track of the score and control the 
+    sequence of play.
+
+    Attributes:
+        keep_playing (bool): keeps running or finishes the game if the user want.
+        score (int): the initial score.
+        dealer (Dealer):  an instance of the class of objects known as Dealer.
+        p_card (str): the previous card converted to str => 'Ace', 'Jack', 'Queen' or 'King'.
+        n_card (str): the new card converted to str => 'Ace', 'Jack', 'Queen' or 'King'.
+    '''
 
     def __init__(self):
+        '''The class constructor.
+        
+        Args:
+            self (Director): an instance of Director.
+        '''
 
         self.keep_playing = True
         self.score = 300
@@ -12,6 +28,11 @@ class Director():
 
 
     def start_game(self):
+        '''Starts the game loop to control the sequence of play.
+        
+        Args:
+            self (Director): an instance of Director.
+        '''
 
         while self.keep_playing:
             self.get_card()
@@ -19,9 +40,15 @@ class Director():
             self.track_score()
             
 
-    # I've changed this name from get_input to get_card
-    # bacause we are going to get the card N° from the dealer
     def get_card(self):
+        '''Gets the cards at the beginning of each round of play.
+        Also, it converts the numbers 1, 11, 12 an 13 to str
+        respectively, because they are face cards.
+
+        Args:
+            self (Director): An instance of Director.
+        '''
+
 
         self.dealer.deal_card()
 
@@ -48,24 +75,32 @@ class Director():
         else:
             self.n_card = str(self.dealer.new_card)
 
-    # I've changed the name of this function in order to track the score
-    # and display if the user lost the game
     def track_score(self):
+        '''This function will track the score and see if the user
+        loses the game or not.
+
+        Args:
+            self (Director): An instance of Director.
+        '''
         
         if self.score <= 0:
             self.score = 0
             self.keep_playing = False
             print('You\'ve lost the game!')
         
-    # This function is the interactive portion of the program.
-    # Here we seek player input and display information to the player.
+    
     def do_output(self):
+        '''This function is the interactive portion of the program.
+        Here we seek player input and display information to the player.
+        
+        Args:
+            self (Director): An instance of Director.
+            '''
 
         print(f'The card is {self.p_card}')
-        # not sure if this input should be here, or in another place.
+
         user_input = input('Higher or lower? [h/l] ')
-        # Also we should get the input of the user and pass that value to the compare_card,
-        # that comes from the dealer.
+       
         self.score += self.dealer.compare_card(user_input)
 
         print(f'Next card was: {self.n_card}')
@@ -74,9 +109,6 @@ class Director():
 
         playing = input('Keep playing? [y/n] ')
 
-        # It may be possible it's necessary to adjust this. 
-        # Maybe the dealer should handle if they can keep playing
-        # since the score may be 0 and they could not be able to play anymore.
         if playing.lower() == 'y':
             self.keep_playing = True
         else:
