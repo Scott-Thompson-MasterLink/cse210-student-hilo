@@ -1,5 +1,5 @@
 import random
-from typing import NewType
+
 
 class Dealer:
     '''The responsibilites of the dealer is to track and generate cards, determine score for the guess.
