@@ -31,7 +31,8 @@ class Director():
             self.keep_playing = False
             print('You\'ve lost the game!')
         
-
+    # This function is the interactive portion of the program.
+    # Here we seek player input and display information to the player.
     def do_output(self):
 
         print(f'The card is {self.dealer.previous_card}')
