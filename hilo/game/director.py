@@ -1,3 +1,5 @@
+from colorama import  Fore
+from colorama import Style
 from game.dealer import Dealer
 
 class Director():
@@ -68,7 +70,19 @@ class Director():
         # that comes from the dealer.
         self.score += self.dealer.compare_card(user_input)
 
-        print(f'Next card was: {self.n_card}')
+        if self.dealer.new_card > self.dealer.previous_card and user_input == "h":
+            print(f'{Fore.GREEN}Next card was: {self.n_card}{Style.RESET_ALL}')
+        elif self.dealer.new_card > self.dealer.previous_card and user_input == "l":
+            print(f'{Fore.RED}Next card was: {self.n_card}{Style.RESET_ALL}')
+        elif self.dealer.new_card < self.dealer.previous_card and user_input == "l":
+            print(f'{Fore.GREEN}Next card was: {self.n_card}{Style.RESET_ALL}')
+        elif self.dealer.new_card < self.dealer.previous_card and user_input == "h":
+            print(f'{Fore.RED}Next card was: {self.n_card}{Style.RESET_ALL}')
+        elif self.dealer.new_card == self.dealer.previous_card and user_input == "l":
+            print(f'{Fore.YELLOW}Next card was: {self.n_card}{Style.RESET_ALL}')
+        elif self.dealer.new_card == self.dealer.previous_card and user_input == "h":
+            print(f'{Fore.YELLOW}Next card was: {self.n_card}{Style.RESET_ALL}')
+
 
         print(f'Your score is: {self.score}')
 
