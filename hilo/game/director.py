@@ -56,6 +56,3 @@ class Director():
         else:
             self.keep_playing = False
             print('Good bye baby!')
-
-
-# I didn't add any comment to the functions, that might be necessary
