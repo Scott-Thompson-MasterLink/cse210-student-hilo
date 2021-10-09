@@ -7,6 +7,9 @@ class Director():
         self.keep_playing = True
         self.score = 300
         self.dealer = Dealer()
+        self.p_card = ''
+        self.n_card = ''
+
 
     def start_game(self):
 
@@ -22,6 +25,29 @@ class Director():
 
         self.dealer.deal_card()
 
+        if self.dealer.previous_card == 13:
+            self.p_card = 'King'
+        elif self.dealer.previous_card == 12:
+            self.p_card = 'Queen'
+        elif self.dealer.previous_card == 11:
+            self.p_card = 'Jack'
+        elif self.dealer.previous_card == 1:
+            self.p_card = 'Ace'
+        else:
+            self.p_card = str(self.dealer.previous_card)
+
+
+        if self.dealer.new_card == 13:
+            self.n_card = 'King'
+        elif self.dealer.new_card == 12:
+            self.n_card = 'Queen'
+        elif self.dealer.new_card == 11:
+            self.n_card = 'Jack'
+        elif self.dealer.new_card == 1:
+            self.n_card = 'Ace'
+        else:
+            self.n_card = str(self.dealer.new_card)
+
     # I've changed the name of this function in order to track the score
     # and display if the user lost the game
     def track_score(self):
@@ -35,14 +61,14 @@ class Director():
     # Here we seek player input and display information to the player.
     def do_output(self):
 
-        print(f'The card is {self.dealer.previous_card}')
+        print(f'The card is {self.p_card}')
         # not sure if this input should be here, or in another place.
         user_input = input('Higher or lower? [h/l] ')
         # Also we should get the input of the user and pass that value to the compare_card,
         # that comes from the dealer.
         self.score += self.dealer.compare_card(user_input)
 
-        print(f'Next card was: {self.dealer.new_card}')
+        print(f'Next card was: {self.n_card}')
 
         print(f'Your score is: {self.score}')
 
